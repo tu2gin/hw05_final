@@ -94,14 +94,13 @@ class PostContextImg(TestCase):
         self.user = User.objects.create_user(username='HasNoName')
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
-        small_gif = (            
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
-        )
+        small_gif = (b'\x47\x49\x46\x38\x39\x61\x02\x00'
+                     b'\x01\x00\x80\x00\x00\x00\x00\x00'
+                     b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+                     b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+                     b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+                     b'\x0A\x00\x3B'
+                     )
         uploaded = SimpleUploadedFile(
             name='small.gif',
             content=small_gif,
@@ -113,10 +112,10 @@ class PostContextImg(TestCase):
                 author=self.user,
                 text='text',
                 group=self.group,
-                image = uploaded)
+                image=uploaded)
 
     def test_index_img(self):
-        """Шаблон index сформирован с правильным контекстом И имеет картинку."""
+        """Шаблон index с правильным контекстом И имеет картинку."""
         response = self.guest_client.get(reverse(
             'posts:index'))
         first_object = response.context['page_obj'][0]
@@ -146,14 +145,13 @@ class PostContextTests(TestCase):
         self.user = User.objects.create_user(username='HasNoName')
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
-        small_gif = (            
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
-        )
+        small_gif = (b'\x47\x49\x46\x38\x39\x61\x02\x00'
+                     b'\x01\x00\x80\x00\x00\x00\x00\x00'
+                     b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+                     b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+                     b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+                     b'\x0A\x00\x3B'
+                     )
         uploaded = SimpleUploadedFile(
             name='small.gif',
             content=small_gif,
@@ -165,8 +163,8 @@ class PostContextTests(TestCase):
                 author=self.user,
                 text='text',
                 group=self.group,
-                image = uploaded)
- 
+                image=uploaded)
+
     def test_index_page_correct_context(self):
         """Шаблон index сформирован с правильным контекстом."""
         response = self.authorized_client.get(reverse(
@@ -174,7 +172,7 @@ class PostContextTests(TestCase):
         first_object = response.context['page_obj'][0]
         index_posts_text = first_object.text
         self.assertEqual(index_posts_text, 'text')
-    
+
     def test_group_posts_page_correct_context(self):
         """Шаблон group_posts сформирован с правильным контекстом."""
         response = self.authorized_client.get(reverse(
@@ -313,14 +311,13 @@ class PostAddTests(TestCase):
         posts_count_index = Post.objects.count()
         posts_count_profile = Post.objects.filter(author=self.user).count()
         posts_count_group = Post.objects.filter(group=self.group.pk).count()
-        small_gif = (            
-             b'\x47\x49\x46\x38\x39\x61\x02\x00'
-             b'\x01\x00\x80\x00\x00\x00\x00\x00'
-             b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
-             b'\x00\x00\x00\x2C\x00\x00\x00\x00'
-             b'\x02\x00\x01\x00\x00\x02\x02\x0C'
-             b'\x0A\x00\x3B'
-        )
+        small_gif = (b'\x47\x49\x46\x38\x39\x61\x02\x00'
+                     b'\x01\x00\x80\x00\x00\x00\x00\x00'
+                     b'\xFF\xFF\xFF\x21\xF9\x04\x00\x00'
+                     b'\x00\x00\x00\x2C\x00\x00\x00\x00'
+                     b'\x02\x00\x01\x00\x00\x02\x02\x0C'
+                     b'\x0A\x00\x3B'
+                     )
         uploaded = SimpleUploadedFile(
             name='small.gif',
             content=small_gif,
@@ -330,7 +327,7 @@ class PostAddTests(TestCase):
             author=self.user,
             text='text',
             group=self.group,
-            image = uploaded)
+            image=uploaded)
         posts_add_index = Post.objects.count()
         posts_add_profile = Post.objects.filter(author=self.user).count()
         posts_add_group = Post.objects.filter(group=self.group.pk).count()
@@ -372,7 +369,7 @@ class CommentAddTests(TestCase):
             text='text',
             post=self.post)
         comment_count_add = Comment.objects.filter(post=self.post).count()
-        self.assertEqual(comment_count + 1, comment_count_add)    
+        self.assertEqual(comment_count + 1, comment_count_add)
 
 
 class TestCache(TestCase):

@@ -15,8 +15,9 @@ def check_follow_status(author, user_fol):
     count_fol = Follow.objects.filter(user=user_fol, author=author).count()
     if count_fol == 1:
         return True
-    else:    
+    else:
         return False
+
 
 @cache_page(20)
 def index(request):
@@ -28,6 +29,7 @@ def index(request):
         'page_obj': page_obj,
     }
     return render(request, 'posts/index.html', context)
+
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
@@ -44,6 +46,7 @@ def group_posts(request, slug):
     }
     return render(request, 'posts/group_list.html', context)
 
+
 def profile(request, username):
     author = User.objects.get(username=username)
     if request.user.is_authenticated:
@@ -56,13 +59,13 @@ def profile(request, username):
     paginator = Paginator(post_list, settings.PAG_POST)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
     context = {
         'author': author,
         'page_obj': page_obj,
         'following': follow_status,
     }
     return render(request, 'posts/profile.html', context)
+
 
 def post_detail(request, post_id):
     is_edit = False
@@ -90,6 +93,7 @@ def post_detail(request, post_id):
     }
     return render(request, 'posts/post_detail.html', context)
 
+
 @login_required
 @csrf_exempt
 def create(request):
@@ -106,6 +110,7 @@ def create(request):
         form = PostForm()
 
     return render(request, 'posts/create.html', {'form': form})
+
 
 @login_required
 @csrf_exempt
@@ -133,6 +138,7 @@ def post_edit(request, post_id):
                    'form': form,
                    'post': post, })
 
+
 @login_required
 def add_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -143,7 +149,8 @@ def add_comment(request, post_id):
             comment.author = request.user
             comment.post = post
             comment.save()
-    return redirect('posts:post_detail', post_id=post_id) 
+    return redirect('posts:post_detail', post_id=post_id)
+
 
 @login_required
 def follow_index(request):
@@ -160,9 +167,9 @@ def follow_index(request):
     }
     return render(request, 'posts/follow.html', context)
 
+
 @login_required
 def profile_follow(request, username):
-    
     author = User.objects.get(username=username)
     user_fol = User.objects.get(username=request.user)
     print(author)
@@ -179,16 +186,15 @@ def profile_follow(request, username):
             'following': follow_status,
         }
         return render(request, 'posts/profile.html', context)
-    
+
     elif not check_follow_status(author, user_fol):
         post_list = Post.objects.filter(author=author)
         paginator = Paginator(post_list, settings.PAG_POST)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        Follow.objects.create(
-                user=user_fol,
-                author=author,
-                )
+        Follow.objects.create(user=user_fol,
+                              author=author,
+                              )
         follow_status = check_follow_status(author, user_fol)
         context = {
             'author': author,
@@ -208,6 +214,7 @@ def profile_follow(request, username):
             'following': follow_status,
         }
         return render(request, 'posts/profile.html', context)
+
 
 @login_required
 def profile_unfollow(request, username):

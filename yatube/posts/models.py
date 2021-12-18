@@ -24,13 +24,11 @@ class Post(models.Model):
                               verbose_name='Группа',
                               help_text='Выберите группу'
                               )
-    # Поле для картинки (необязательное) 
     image = models.ImageField('Картинка',
                               upload_to='posts/',
                               blank=True
-                              )  
-    # Аргумент upload_to указывает директорию, 
-    # в которую будут загружаться пользовательские файлы. 
+                              )
+
     class Meta:
         ordering = ('-pub_date',)
         verbose_name = 'Пост'
@@ -57,11 +55,11 @@ class Group(models.Model):
 
 
 class Comment(models.Model):
-    post  = models.ForeignKey('Post',
-                              on_delete=models.CASCADE,
-                              related_name='comments',
-                              verbose_name='Коментарий к посту'
-                              )
+    post = models.ForeignKey('Post',
+                             on_delete=models.CASCADE,
+                             related_name='comments',
+                             verbose_name='Коментарий к посту'
+                             )
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='comments',
@@ -74,12 +72,13 @@ class Comment(models.Model):
                                     auto_now_add=True
                                     )
 
+
 class Follow(models.Model):
     user = models.ForeignKey(User,
-                               on_delete=models.CASCADE,
-                               related_name='follower',
-                               )
-    author  = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name='follower',
+                             )
+    author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='following',
                                )

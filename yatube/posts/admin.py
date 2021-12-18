@@ -18,11 +18,13 @@ class GroupAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     list_editable = ('title', 'slug', 'description',)
 
+
 @admin.register(Comment)
 class GroupAdmin(admin.ModelAdmin):
     list_display = ('pk', 'post', 'author', 'text', 'pub_date')
     search_fields = ('text',)
     list_editable = ('post', 'author', 'text',)
+
 
 @admin.register(Follow)
 class GroupAdmin(admin.ModelAdmin):

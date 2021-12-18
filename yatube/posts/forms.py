@@ -11,6 +11,7 @@ class PostForm(forms.ModelForm):
             'name': 'Форма для работы с постами',
         }
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

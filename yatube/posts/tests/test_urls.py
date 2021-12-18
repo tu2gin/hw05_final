@@ -80,14 +80,14 @@ class PostURLTests(TestCase):
             urls_edit: settings.OK,
             '/create/': settings.OK,
             '/fdshfgd/': settings.NOT_FOUND,
-            urls_add_com: settings.OK,
+            urls_add_com: settings.FOUND,
         }
         for adress, answer in data_check.items():
             with self.subTest(adress=adress):
                 response = self.authorized_client.get(adress)
                 self.assertEqual(response.status_code, answer)
 
-    def test_urls_uses_correct_template(self):
+    def test_urls_user_template(self):
         """URL-адрес использует соответствующий шаблон."""
         urls_group = str(f'/group/{self.GROUP_SLUK}/')
         urls_auth = str(f'/profile/{self.AUTHOR}/')

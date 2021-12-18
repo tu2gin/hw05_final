@@ -1,9 +1,9 @@
 from django import forms
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.db.models.fields.files import ImageFieldFile
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.db.models.fields.files import ImageFieldFile
 
 from ..models import Comment, Group, Post, User
 

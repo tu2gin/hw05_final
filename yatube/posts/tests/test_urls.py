@@ -13,14 +13,6 @@ class StaticURLHomepageTests(TestCase):
         response = self.guest_client.get('/')
         self.assertEqual(response.status_code, settings.OK)
 
-    def test_techpage(self):
-        response = self.guest_client.get('/about/tech/')
-        self.assertEqual(response.status_code, settings.OK)
-
-    def test_authorpage(self):
-        response = self.guest_client.get('/about/author/')
-        self.assertEqual(response.status_code, settings.OK)
-
 
 class PostURLTests(TestCase):
 

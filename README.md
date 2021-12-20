@@ -7,9 +7,15 @@ C:\\Users\\*NAME USER*\\AppData\\Local\\Programs\\Python\\Python310\\python.exe 
 
 source venv/Scripts/activate
 
+WARNING: You are using pip version 21.2.4;
+
+python -m pip install --upgrade pip
+
 pip install -r requirements.txt
 
 pip install pytest --upgrade
+
+pip install flake8-quotes
 
 python manage.py runserver
 

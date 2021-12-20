@@ -49,6 +49,8 @@ class Group(models.Model):
 
     class Meta:
         ordering = ('-title',)
+        verbose_name = 'Группы'
+        verbose_name_plural = 'Группы'
 
     def __str__(self):
         return self.title
@@ -72,6 +74,14 @@ class Comment(models.Model):
                                     auto_now_add=True
                                     )
 
+    class Meta:
+        ordering = ('-pub_date',)
+        verbose_name = 'Комментарии'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return self.text
+
 
 class Follow(models.Model):
     user = models.ForeignKey(User,
@@ -82,3 +92,8 @@ class Follow(models.Model):
                                on_delete=models.CASCADE,
                                related_name='following',
                                )
+
+    class Meta:
+        ordering = ('-user',)
+        verbose_name = 'Подпись на автора'
+        verbose_name_plural = 'Подпись на автора'

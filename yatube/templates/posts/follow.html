@@ -4,7 +4,6 @@
 {% load cache %}
 
 {% block content %}
-{% cache 20 index_page %}
 {% include 'posts/includes/switcher.html' %}
       <div class="container py-5">     
         
@@ -41,7 +40,6 @@
   {% include 'posts/includes/paginator.html' %}
 
       </div>
-      {% endcache %}
 {% endblock %}  
 
  

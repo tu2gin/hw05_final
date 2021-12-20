@@ -69,7 +69,6 @@ def post_detail(request, post_id):
     is_edit = False
     post = get_object_or_404(Post, id=post_id)
     author = get_object_or_404(User, username=post.author)
-    posts_count = Post.objects.filter(pk=post_id).count()
     post_obj = Post.objects.get(id=post_id)
     group = post_obj.group
     pub_date = post_obj.pub_date
@@ -84,7 +83,6 @@ def post_detail(request, post_id):
         'group': group,
         'post_id': post_id,
         'author': author,
-        'posts_count': posts_count,
         'is_edit': is_edit,
         'form_comment': form_comment,
         'comments': comments

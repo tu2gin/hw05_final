@@ -97,3 +97,6 @@ class Follow(models.Model):
         ordering = ('-user',)
         verbose_name = 'Подпись на автора'
         verbose_name_plural = 'Подпись на автора'
+
+    def __str__(self):
+        return self.user

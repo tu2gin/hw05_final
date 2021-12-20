@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import Comment, Group, Post, User
+from ..models import Comment, Follow, Group, Post, User
 
 
 class PostModelTest(TestCase):
@@ -8,6 +8,7 @@ class PostModelTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.user = User.objects.create_user(username='auth')
+        cls.user2 = User.objects.create_user(username='auth2')
         cls.group = Group.objects.create(
             title='Тестовая группа',
             slug='Тестовый слаг',
@@ -21,6 +22,10 @@ class PostModelTest(TestCase):
             post=cls.post,
             author=cls.user,
             text='Тестовая комментарий',
+        )
+        cls.comm = Follow.objects.create(
+            user=cls.user2,
+            author=cls.user,
         )
 
     def test_models_Group_have_correct_object_names(self):

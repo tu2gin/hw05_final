@@ -4,21 +4,13 @@ from django.test import Client, TestCase
 from ..models import Group, Post, User
 
 
-class StaticURLTests(TestCase):
+class StaticURLHomepageTests(TestCase):
 
     def setUp(self):
         self.guest_client = Client()
 
     def test_homepage(self):
         response = self.guest_client.get('/')
-        self.assertEqual(response.status_code, settings.OK)
-
-    def test_techpage(self):
-        response = self.guest_client.get('/about/tech/')
-        self.assertEqual(response.status_code, settings.OK)
-
-    def test_authorpage(self):
-        response = self.guest_client.get('/about/author/')
         self.assertEqual(response.status_code, settings.OK)
 
 

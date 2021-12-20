@@ -19,7 +19,7 @@ class StaticURLHomepageTests(TestCase):
 
     def test_authorpage(self):
         response = self.guest_client.get('/about/author/')
-        self.assertEqual(response.status_code, settings.OK) 
+        self.assertEqual(response.status_code, settings.OK)
 
 
 class PostURLTests(TestCase):

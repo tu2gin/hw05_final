@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import CommentForm, PostForm
-from .models import Comment, Follow, Group, Post, User
+from .models import Follow, Group, Post, User
 
 
 def check_follow_status(author, user_fol):
@@ -73,7 +73,6 @@ def post_detail(request, post_id):
     group = post_obj.group
     pub_date = post_obj.pub_date
     form_comment = CommentForm(request.POST or None,)
-    comments = Comment.objects.filter(post=post_id)
     if post.author == request.user:
         is_edit = True
     context = {
@@ -85,7 +84,6 @@ def post_detail(request, post_id):
         'author': author,
         'is_edit': is_edit,
         'form_comment': form_comment,
-        'comments': comments
     }
     return render(request, 'posts/post_detail.html', context)
 

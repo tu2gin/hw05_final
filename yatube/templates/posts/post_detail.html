@@ -40,7 +40,7 @@
             <a class="btn btn-primary" href="/posts/{{ post_id }}/edit/">
               редактировать запись
             </a> {% endif %}
-            {% include 'posts/comments.html' %}            
+            {% include 'posts/comments.html' with comments=post.comments.all form_comment=form_comment post=post %}            
           </article>
         </div>     
       </div>

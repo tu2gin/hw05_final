@@ -168,8 +168,6 @@ def follow_index(request):
 def profile_follow(request, username):
     author = User.objects.get(username=username)
     user_fol = User.objects.get(username=request.user)
-    print(author)
-    print(user_fol)
     if author == user_fol:
         post_list = Post.objects.filter(author=author)
         paginator = Paginator(post_list, settings.PAG_POST)

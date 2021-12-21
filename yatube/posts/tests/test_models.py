@@ -23,10 +23,11 @@ class PostModelTest(TestCase):
             author=cls.user,
             text='Тестовая комментарий',
         )
-        cls.comm = Follow.objects.create(
+        cls.follow = Follow.objects.create(
             user=cls.user2,
             author=cls.user,
         )
+        cls.fol = cls.user2
 
     def test_models_Group_have_correct_object_names(self):
         """Проверяем, что у моделей корректно работает __str__."""
@@ -42,3 +43,8 @@ class PostModelTest(TestCase):
         """Проверяем, что у моделей корректно работает __str__."""
         act = PostModelTest.post.__str__()
         self.assertEqual(act, 'Текст Поста', '__str__ модели Post')
+
+    def test_models_Follow_have_correct_object_names(self):
+        """Проверяем, что у моделей корректно работает __str__."""
+        act = PostModelTest.follow.__str__()
+        self.assertEqual(act, self.fol, '__str__ модели Follow')

@@ -20,6 +20,7 @@ pip install flake8-quotes
 python manage.py runserver
 
 Flake8
+
 Выбрать и активировать нужный линтер можно с помощью командной строки VSC (Command Palette, вызывается через Ctrl+Shift+P).
 Введите в командную строку Python: Select Linter и нажмите Enter.
 
@@ -133,3 +134,8 @@ python manage.py makemigrations
 # Затем запускается команда migrate, и в этот момент все изменения вносятся в БД.
 
 python manage.py migrate
+
+# ----------------
+# установка django-debug-toolbar
+# ----------------
+pip install django-debug-toolbar

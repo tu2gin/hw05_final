@@ -1,141 +1,36 @@
 # backend_community_homework
 
-[![CI](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw03_forms/actions/workflows/python-app.yml)
 
+Учебный проект от Яндекс.Практикум, представляет собой собственный блог с системой подписок и коментариев, проект покрыт тестами и прошел код ревью.
 
-C:\\Users\\*NAME USER*\\AppData\\Local\\Programs\\Python\\Python310\\python.exe -m venv venv
+Стек технологий: Python3 Django Pytest Pillow Bootstrap
 
-source venv/Scripts/activate
+Установка: Выполнить pip install -r requirements.txt Выполнить python3 manage.py runserver
 
-WARNING: You are using pip version 21.2.4;
+Продолжение заданий hw02_community, hw03_forms по созданию социальной сети yatube.
 
-python -m pip install --upgrade pip
-
-pip install -r requirements.txt
-
-pip install pytest --upgrade
-
-pip install flake8-quotes
-
-python manage.py runserver
-
-Flake8
-
-Выбрать и активировать нужный линтер можно с помощью командной строки VSC (Command Palette, вызывается через Ctrl+Shift+P).
-Введите в командную строку Python: Select Linter и нажмите Enter.
-
-
- 
-yatube/static/
+Далее постановка задания из курса.
 
 
 
-How to Use Python isort Library
-https://simpleisbetterthancomplex.com/packages/2016/10/08/isort.html
+# Финальное задание
+Осталось добавить в проект систему подписки на авторов и создать ленту их постов.
 
-Установка
-Установите его через pip или возьмите код с GitHub:
+Задача вам знакома: создайте модель, напишите view-функцию, добавьте в urls.py новые пути, подготовьте шаблоны.
 
-pip install isort
-Использование
-Вы уже можете начать использовать его без какой-либо настройки:
+Клонируйте репозиторий hw05_final и скопируйте в него код из репозитория hw04_tests, в котором вы работали в этом спринте.
 
-Проверить и применить изменения везде
-isort *
+Можно приступать к заданию.
 
-Показать изменения перед применением
-isort * --diff
+Модель Follow должна иметь такие поля:
 
-isort views.py urls.py
+user — ссылка на объект пользователя, который подписывается. Укажите имя связи: related_name="follower"
+author — ссылка на объект пользователя, на которого подписываются, имя связи пусть будет related_name="following"
+Напишите view-функцию страницы, куда будут выведены посты авторов, на которых подписан текущий пользователь.
 
-# show a diff before applying any change
-isort views.py --diff
+# Тестирование
+Напишите тесты, проверяющие работу нового сервиса:
 
-# just check for errors
-isort urls.py --check-only
-
-
-python manage.py test -v 2
-
-python manage.py test posts.tests.test_views.PostContextTests.test_img
-
-python manage.py test posts.tests.test_views.CommentAddTests.test_add_comment
-
-
-Тестомерки Coverage
-Проект не дымит. Что тестировать дальше?
-Ответ на этот вопрос даст инструмент coverage (англ. «покрытие»). Он показывает, в какой степени код проекта проверен (покрыт) тестами.
-Любимая игра программистов — увеличить coverage до 100%.
-Установка пакета Coverage
-
-pip3 install coverage
-
-https://coverage.readthedocs.io/en/latest/index.html
-
-
-# После выполнения команды 
-coverage run --source='posts,users' manage.py test -v 2 
-# coverage сформирует отчёт и сохранит его в корневой папке проекта, в файле .coverage.
-
-# Самый простой способ — вывести результаты в консоль.
-coverage report
-
-# Для представления результатов есть и более удобный формат: отчёт можно сохранить в виде HTML.
-coverage html
-
-# Все команды отображения работают с созданным отчётом .coverage. После нового запуска 
-coverage run 
-# этот отчёт будет перезаписан.
-
-
-Хозяйке на заметку: стандартный метод slugify из модуля django.utils.text не умеет работать с кириллицей. Нужно установить в виртуальное окружение пакет pytils (pip3 install pytils) и импортировать slugify именно из него, как это сделано в листинге deals/models.py
-
-
-# ----------------
-# Работа с графикой
-# ----------------
-
-# {Установка}
-pip install pillow 
-pip install sorl-thumbnail
-
-# {Документация}
-https://github.com/jazzband/sorl-thumbnail
-
-# {Загрузка тегов библиотеки в шаблон}
-<!-- Загрузка тегов библиотеки в шаблон -->
-{% load thumbnail %}
-
-
-<!-- Пример использования тега для пропорционального уменьшения и обрезки -->
-<!-- картинки до размера 100x100px с центрированием -->
-{% thumbnail item.image "100x100" crop="center" as im %}
-  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-{% endthumbnail %}
-
-
-# ---!---!---!---!---!---!---!---!---!---!---!---!---!---
-
-# ----------------
-# Ошибки
-# ----------------
-# ModuleNotFoundError: No module named 'pip'
-python -m ensurepip
-
-# ----------------
-# Миграция Базы
-# ----------------
-# Первым делом запускается команда makemigrations, Django проверяет модели и таблицы в БД, анализирует их на соответствие друг другу, подготавливает скрипты миграций
-#  и сообщает, какие миграции необходимо применить; однако никаких изменений в БД в этот момент не вносится.
-# ----------------
-
-python manage.py makemigrations
-
-# Затем запускается команда migrate, и в этот момент все изменения вносятся в БД.
-
-python manage.py migrate
-
-# ----------------
-# установка django-debug-toolbar
-# ----------------
-pip install django-debug-toolbar
+Авторизованный пользователь может подписываться на других пользователей и удалять их из подписок.
+Новая запись пользователя появляется в ленте тех, кто на него подписан и не появляется в ленте тех, кто не подписан на него.
+Только авторизированный пользователь может комментировать посты.
